@@ -2,7 +2,6 @@ package DSA.STACK;
 
 import java.util.NoSuchElementException;
 import java.util.Scanner;
-import java.lang.System;
 
 class StackNode{
     int data;

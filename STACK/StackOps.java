@@ -1,7 +1,6 @@
 package DSA.STACK;
 
 import java.util.Scanner;
-import java.lang.System;
 
 class StackUnderFlowException extends RuntimeException{
     public StackUnderFlowException(String e){
