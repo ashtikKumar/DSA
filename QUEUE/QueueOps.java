@@ -15,7 +15,7 @@ class Queue{
     }
 
     boolean full(){
-        return size==capacity || front>rear;
+        return (rear+1)%capacity == front || rear == front-1;
     }
     boolean empty(){
         return size==0 || front>rear || (front==-1 && rear==-1);
@@ -24,21 +24,25 @@ class Queue{
     void enqueue(int data) throws IllegalStateException{
         if(full()) throw new IllegalStateException("Queue Overflow !");
         queue[++rear] = data;
-        if(front==-1) front++;
+        if(front==-1) front=0;
         size++;
     }
 
     int dequeue() throws IllegalStateException{
         if(empty()) throw new IllegalStateException("Queue Underflow !");
         int x = queue[front];
-        if(front==rear) front=rear=-1;
-        else front++;
+        for(int i=0; i<size-1; i++){
+            queue[i] = queue[i+1];
+        }
+        rear--;
+        size--;
+        if(front>rear) front = rear = -1;
         return x;
     }
 
     void display() throws IllegalStateException{
         if(empty()) throw new IllegalStateException("Queue is EMPTY !");
-        for(int i=front; i<=rear; i++){
+        for(int i=0; i<size; i++){
             System.out.print(queue[i]+" ");
         }
         System.out.println();
