@@ -52,8 +52,7 @@ class Queue{
 public class QueueOps {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Enter capacity of queue :");
-        Queue queue = new Queue(sc.nextInt());
+
         do{
             System.out.println("--Menu--");
             System.out.println("1. Enqueue");
