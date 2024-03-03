@@ -2,6 +2,7 @@ package DSA.STACK;
 
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+import java.lang.System;
 
 class StackNode{
     int data;
@@ -103,7 +104,7 @@ public class Stack_Linked_List {
                         break;
 
                     case 0:System.out.println("Exiting...");
-                        break;
+                        System.exit(0);
 
                     default:System.out.println("Invalid Choice !");
                 }
@@ -115,6 +116,7 @@ public class Stack_Linked_List {
                 System.out.print("\nDo you want to continue (1/0) :");
             }
         }while(sc.nextInt()==1);
+        System.out.println("Exiting...");
         sc.close();
     }
 }

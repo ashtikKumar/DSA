@@ -1,6 +1,7 @@
 package DSA.STACK;
 
 import java.util.Scanner;
+import java.lang.System;
 
 class StackUnderFlowException extends RuntimeException{
     public StackUnderFlowException(String e){
@@ -72,7 +73,7 @@ public class StackOps {
 
         do{
             System.out.println("---MENU---");
-            System.out.println("1. Push\n2. Pop\n3. Display\n4. Peek\n");
+            System.out.println("1. Push\n2. Pop\n3. Display\n4. Peek\n0. Exit");
             System.out.print("Enter your choice : ");
             try{
                 switch(sc.nextInt()){
@@ -90,8 +91,8 @@ public class StackOps {
                     case 4:System.out.print("Top element :"+stack.peek());
                         break;
 
-                    case 0:System.out.print("Exiting...");
-                        break;
+                    case 0:System.out.println("Exiting...");
+                        System.exit(0);
 
                     default:System.out.print("Invalid Choice !");
                 }
@@ -105,6 +106,7 @@ public class StackOps {
                 System.out.println("\n\nDo you want to continue ? (1/0) : ");
             } 
         } while(sc.nextInt()==1);
+        System.out.println("Exiting...");
         sc.close();
     }
 }
