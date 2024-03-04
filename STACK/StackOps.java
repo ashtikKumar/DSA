@@ -66,10 +66,22 @@ class Stack {
 }
 
 public class StackOps {
+    int capacity;
+    Scanner sc = new Scanner(System.in);
+    StackOps(){
+        try{
+            System.out.print("Enter the capacity of the Stack :");
+            capacity = sc.nextInt();
+            if(capacity<=0) throw new IllegalArgumentException();
+        } catch(IllegalArgumentException e){
+            System.out.println("Invalid Capacity !");
+            System.exit(0);
+        }
+    }
     public static void main(String[] args) {
+        StackOps s = new StackOps();
         Scanner sc = new Scanner(System.in);
-        System.out.print("Enter Maximum capacity of Stack :");
-        Stack stack = new Stack(sc.nextInt());
+        Stack stack = new Stack(s.capacity);
 
         do{
             System.out.println("---MENU---");

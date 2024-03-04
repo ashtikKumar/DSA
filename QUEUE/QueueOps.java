@@ -51,7 +51,6 @@ class Queue{
 }
 
 public class QueueOps {
-    // lines to check if the capacity is greater than 0 or not, if not then catch InputMismatchException and print "Invalid Capacity!"
     int capacity;
     Scanner sc = new Scanner(System.in);
     QueueOps(){
