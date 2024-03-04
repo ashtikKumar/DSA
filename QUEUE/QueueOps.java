@@ -1,5 +1,6 @@
 package DSA.QUEUE;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 class Queue{
@@ -50,9 +51,23 @@ class Queue{
 }
 
 public class QueueOps {
+    // lines to check if the capacity is greater than 0 or not, if not then catch InputMismatchException and print "Invalid Capacity!"
+    int capacity;
+    Scanner sc = new Scanner(System.in);
+    QueueOps(){
+        try{
+            System.out.print("Enter the capacity of the Queue :");
+            capacity = sc.nextInt();
+            if(capacity<=0) throw new InputMismatchException();
+        } catch(InputMismatchException e){
+            System.out.println("Invalid Capacity!");
+            System.exit(0);
+        }
+    }
     public static void main(String[] args) {
+        QueueOps q = new QueueOps();
         Scanner sc = new Scanner(System.in);
-
+        Queue queue = new Queue(q.capacity);
         do{
             System.out.println("--Menu--");
             System.out.println("1. Enqueue");
