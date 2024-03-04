@@ -68,8 +68,10 @@ public class Stack_Linked_List {
         return temp.data;
     }
 
-    void display(StackNode head){
+    void display(StackNode head) throws NoSuchElementException{
         StackNode temp = head;
+        if(head==null) throw new NoSuchElementException("Stack is Empty !");
+        System.out.print("Stack :");
         while(temp!=null){
             System.out.print(temp.data+"->");
             temp = temp.next;
@@ -98,8 +100,7 @@ public class Stack_Linked_List {
                     case 3:System.out.println("Top element :"+stack.peek(stack.head));
                         break;
 
-                    case 4:System.out.println("Stack :");
-                        stack.display(stack.head);
+                    case 4:stack.display(stack.head);
                         break;
 
                     case 0:System.out.println("Exiting...");

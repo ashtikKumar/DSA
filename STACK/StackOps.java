@@ -37,6 +37,7 @@ class Stack {
         if(empty()){
             throw new StackUnderFlowException("Stack is Empty !");
         } else {
+            System.out.print("Stack :");
             for(int i=0; i<=top; i++){
                 System.out.print(stack[i]+" ");
             }
