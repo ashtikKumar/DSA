@@ -65,7 +65,6 @@ public class QueueOps {
     }
     public static void main(String[] args) {
         QueueOps q = new QueueOps();
-        Scanner sc = new Scanner(System.in);
         Queue queue = new Queue(q.capacity);
         do{
             System.out.println("--Menu--");
@@ -76,10 +75,10 @@ public class QueueOps {
             System.out.print("Enter Choice :");
 
             try{
-                switch(sc.nextInt()){
+                switch(q.sc.nextInt()){
                     case 1:if(queue.full()) queue.enqueue(0);
                         System.out.print("Enter element to enter :");
-                        queue.enqueue(sc.nextInt());
+                        queue.enqueue(q.sc.nextInt());
                         break;
 
                     case 2:System.out.print("Dequeued element :");
@@ -103,8 +102,8 @@ public class QueueOps {
                 System.out.print("Do you want to continue (1/0) ?");
                 System.out.println();
             }
-        }while(sc.nextInt()==1);
+        }while(q.sc.nextInt()==1);
         System.out.println("Exiting...");
-        sc.close();
+        q.sc.close();
     }
 }
