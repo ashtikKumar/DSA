@@ -54,13 +54,15 @@ public class QueueOps {
     int capacity;
     Scanner sc = new Scanner(System.in);
     QueueOps(){
-        try{
-            System.out.print("Enter the capacity of the Queue :");
-            capacity = sc.nextInt();
-            if(capacity<=0) throw new InputMismatchException();
-        } catch(InputMismatchException e){
-            System.out.println("Invalid Capacity!");
-            System.exit(0);
+        while(true){
+            try{
+                System.out.print("Enter the capacity of the Queue :");
+                capacity = sc.nextInt();
+                if(capacity<=0) throw new InputMismatchException("Invalid Capacity");
+                break;
+            } catch(InputMismatchException e){
+                System.out.println("Error: "+e.getMessage()+", please enter valid capacity !\n");
+            }
         }
     }
     public static void main(String[] args) {

@@ -80,7 +80,6 @@ public class StackOps {
     }
     public static void main(String[] args) {
         StackOps s = new StackOps();
-        Scanner sc = new Scanner(System.in);
         Stack stack = new Stack(s.capacity);
 
         do{
@@ -88,10 +87,10 @@ public class StackOps {
             System.out.println("1. Push\n2. Pop\n3. Display\n4. Peek\n0. Exit");
             System.out.print("Enter your choice : ");
             try{
-                switch(sc.nextInt()){
+                switch(s.sc.nextInt()){
                     case 1:if(stack.full()) stack.push(0);
                         System.out.print("Enter element to push : ");
-                        stack.push(sc.nextInt());
+                        stack.push(s.sc.nextInt());
                         break;
 
                     case 2:System.out.print("Popped element :"+stack.pop());
@@ -117,8 +116,8 @@ public class StackOps {
             } finally{
                 System.out.println("\n\nDo you want to continue ? (1/0) : ");
             } 
-        } while(sc.nextInt()==1);
+        } while(s.sc.nextInt()==1);
         System.out.println("Exiting...");
-        sc.close();
+        s.sc.close();
     }
 }
