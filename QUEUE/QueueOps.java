@@ -107,5 +107,7 @@ public class QueueOps {
         }while(q.sc.nextInt()==1);
         System.out.println("Exiting...");
         q.sc.close();
+
+        System.out.println("Modified");
     }
 }
