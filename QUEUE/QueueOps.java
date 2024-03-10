@@ -64,7 +64,7 @@ public class QueueOps {
     QueueOps(){
         while(true){
             try{
-                System.out.print("Enter the capacity of the Queue :");
+                System.out.print("Enter the capacity of the Queue: ");
                 capacity = sc.nextInt();
                 if(capacity<=0) throw new InputMismatchException("Invalid Capacity");
                 break;
@@ -77,25 +77,26 @@ public class QueueOps {
         QueueOps q = new QueueOps();
         Queue queue = new Queue(q.capacity);
         do{
+            System.out.println();
             System.out.println("--Menu--");
             System.out.println("1. Enqueue");
             System.out.println("2. Dequeue");
             System.out.println("3. Display");
             System.out.println("4. Peek");
             System.out.println("0. Exit");
-            System.out.print("Enter Choice :");
+            System.out.print("Enter Choice: ");
 
             try{
                 switch(q.sc.nextInt()){
                     case 1:if(queue.full()) queue.enqueue(0);
-                        System.out.print("Enter element to enter :");
+                        System.out.print("Enter element to enter: ");
                         queue.enqueue(q.sc.nextInt());
                         break;
 
                     case 2:System.out.println(queue.dequeue());
                         break;
 
-                    case 3:if(!queue.empty()) System.out.print("Queue : ");
+                    case 3:if(!queue.empty()) System.out.print("Queue: ");
                         queue.display();
                         break;
 
@@ -108,12 +109,14 @@ public class QueueOps {
                     default:System.out.print("Invalid Choice !");
                 }
             } catch(IllegalStateException e){
-                System.out.println("Error :"+e.getMessage());
+                System.out.println("Error: "+e.getMessage());
+                if(e.getMessage()=="No More Operations can be performed !"){
+                    System.exit(0);
+                }
             } catch(Exception e){
-                System.out.println("Unexpected Error :"+e.getMessage());
+                System.out.println("Unexpected Error: "+e.getMessage());
             } finally {
-                System.out.print("Do you want to continue (1/0) ?");
-                System.out.println();
+                System.out.print("Do you want to continue (1/0) ? ");
             }
         }while(q.sc.nextInt()==1);
         System.out.println("Exiting...");
