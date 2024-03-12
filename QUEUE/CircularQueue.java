@@ -38,6 +38,7 @@ class CQueue {
         rear--;
         size--;
         if(front>rear) front=rear=-1;
+        System.out.print("Dequeued element: ");
         return x;
     }
 
@@ -92,9 +93,10 @@ public class CircularQueue {
                     case 1:if(queue.full()) queue.enqueue(0);
                         System.out.print("Enter element to enter: ");
                         queue.enqueue(q.sc.nextInt());
+                        queue.display();
                         break;
 
-                    case 2:System.out.print(queue.dequeue());
+                    case 2:System.out.println(queue.dequeue());
                         break;
 
                     case 3:queue.display();
@@ -114,8 +116,10 @@ public class CircularQueue {
             } catch(Exception e){
                 System.out.println("Unexpected Error: "+e.getMessage());
             } finally {
-                System.out.print("Do you want to continue (1/0): ");
+                System.out.print("\nDo you want to continue (1/0): ");
             }
         }while(q.sc.nextInt()==1);
+        System.out.println("Exiting...");
+        q.sc.close();
     }
 }
