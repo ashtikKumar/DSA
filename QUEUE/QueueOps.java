@@ -16,10 +16,10 @@ class Queue{
     }
 
     boolean full(){
-        return (rear+1)%capacity == front || rear == front-1;
+        return size==capacity;
     }
     boolean empty(){
-        return size==0 || front>rear || (front==-1 && rear==-1);
+        return size==0 || (front==-1 && rear==-1);
     }
 
     void enqueue(int data) throws IllegalStateException{
@@ -30,20 +30,28 @@ class Queue{
     }
 
     int dequeue() throws IllegalStateException{
-        if(empty()) throw new IllegalStateException("Queue Underflow !");
-        int x = queue[front];
-        for(int i=0; i<size-1; i++){
-            queue[i] = queue[i+1];
+        if(empty()){
+            if(full()) throw new IllegalStateException("No More Operations can be performed !");
+            else throw new IllegalStateException("Queue Underflow !");
         }
-        rear--;
-        size--;
+        int x = queue[front++];
+        int y = front -1;
+        queue[y] = 0;
         if(front>rear) front = rear = -1;
+        System.out.print("Dequeued Element: ");
+        return x;
+    }
+
+    int peek() throws IllegalStateException {
+        if(empty()) throw new IllegalStateException("Queue is empty !");
+        int x = queue[front];
+        System.out.print("Front element: ");
         return x;
     }
 
     void display() throws IllegalStateException{
         if(empty()) throw new IllegalStateException("Queue is EMPTY !");
-        for(int i=0; i<size; i++){
+        for(int i=front; i<size; i++){
             System.out.print(queue[i]+" ");
         }
         System.out.println();
@@ -56,7 +64,7 @@ public class QueueOps {
     QueueOps(){
         while(true){
             try{
-                System.out.print("Enter the capacity of the Queue :");
+                System.out.print("Enter the capacity of the Queue: ");
                 capacity = sc.nextInt();
                 if(capacity<=0) throw new InputMismatchException("Invalid Capacity");
                 break;
@@ -69,26 +77,30 @@ public class QueueOps {
         QueueOps q = new QueueOps();
         Queue queue = new Queue(q.capacity);
         do{
+            System.out.println();
             System.out.println("--Menu--");
             System.out.println("1. Enqueue");
             System.out.println("2. Dequeue");
             System.out.println("3. Display");
+            System.out.println("4. Peek");
             System.out.println("0. Exit");
-            System.out.print("Enter Choice :");
+            System.out.print("Enter Choice: ");
 
             try{
                 switch(q.sc.nextInt()){
                     case 1:if(queue.full()) queue.enqueue(0);
-                        System.out.print("Enter element to enter :");
+                        System.out.print("Enter element to enter: ");
                         queue.enqueue(q.sc.nextInt());
                         break;
 
-                    case 2:System.out.print("Dequeued element :");
-                        System.out.println(queue.dequeue());
+                    case 2:System.out.println(queue.dequeue());
                         break;
 
-                    case 3:if(!queue.empty()) System.out.print("Queue : ");
+                    case 3:if(!queue.empty()) System.out.print("Queue: ");
                         queue.display();
+                        break;
+
+                    case 4:System.out.println(queue.peek());
                         break;
 
                     case 0:System.out.println("Exiting...");
@@ -97,12 +109,14 @@ public class QueueOps {
                     default:System.out.print("Invalid Choice !");
                 }
             } catch(IllegalStateException e){
-                System.out.println("Error :"+e.getMessage());
+                System.out.println("Error: "+e.getMessage());
+                if(e.getMessage()=="No More Operations can be performed !"){
+                    System.exit(0);
+                }
             } catch(Exception e){
-                System.out.println("Unexpected Error :"+e.getMessage());
+                System.out.println("Unexpected Error: "+e.getMessage());
             } finally {
-                System.out.print("Do you want to continue (1/0) ?");
-                System.out.println();
+                System.out.print("Do you want to continue (1/0) ? ");
             }
         }while(q.sc.nextInt()==1);
         System.out.println("Exiting...");
