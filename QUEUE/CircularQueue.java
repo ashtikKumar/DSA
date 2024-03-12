@@ -83,8 +83,7 @@ public class CircularQueue {
             System.out.println("1. Enqueue");
             System.out.println("2. Dequeue");
             System.out.println("3. Display");
-            System.out.println("4. Display");
-            System.out.println("5. Peek");
+            System.out.println("4. Peek");
             System.out.println("0. Exit");
             System.out.print("Enter Choice: ");
 
@@ -95,8 +94,27 @@ public class CircularQueue {
                         queue.enqueue(q.sc.nextInt());
                         break;
 
-                    case 2:
+                    case 2:System.out.print(queue.dequeue());
+                        break;
+
+                    case 3:queue.display();
+                        break;
+
+                    case 4:System.out.println(queue.peek());
+                        break;
+
+                    case 0:System.out.println("Exiting...");
+                        System.exit(0);
+                        break;
+
+                    default:System.out.println("Invalid Choice !");
                 }
+            } catch(IllegalStateException e){
+                System.out.println("Error: "+e.getMessage());
+            } catch(Exception e){
+                System.out.println("Unexpected Error: "+e.getMessage());
+            } finally {
+                System.out.print("Do you want to continue (1/0): ");
             }
         }while(q.sc.nextInt()==1);
     }
