@@ -1,81 +1,83 @@
-package DSA.QUEUE;
+package DSA.Data_Structures.QUEUE;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
-class Queue{
+class CQueue {
     int size, capacity, front, rear;
-    int queue[];
+    int cqueue[];
 
-    Queue(int n){
-        this.size=0;
-        this.capacity=n;
-        this.front=-1;
-        this.rear=-1;
-        this.queue = new int[capacity];
+    CQueue(int n){
+        this.size = 0;
+        this.capacity = n;
+        this.front = -1;
+        this.rear = -1;
+        this.cqueue = new int[capacity];
     }
 
     boolean full(){
-        return size==capacity;
+        return (rear+1)%capacity == front || rear==front-1;
     }
     boolean empty(){
-        return size==0 || (front==-1 && rear==-1);
+        return size==0 || front>rear || (front==-1 && rear==-1);
     }
 
     void enqueue(int data) throws IllegalStateException{
         if(full()) throw new IllegalStateException("Queue Overflow !");
-        queue[++rear] = data;
+        cqueue[++rear] = data;
         if(front==-1) front=0;
         size++;
     }
 
     int dequeue() throws IllegalStateException{
-        if(empty()){
-            if(full()) throw new IllegalStateException("No More Operations can be performed !");
-            else throw new IllegalStateException("Queue Underflow !");
+        if(empty()) throw new IllegalStateException("Queue Underflow !");
+        int x = cqueue[front];
+        for(int i=0; i<size-1; i++){
+            cqueue[i] = cqueue[i+1];
         }
-        int x = queue[front++];
-        int y = front -1;
-        queue[y] = 0;
-        if(front>rear) front = rear = -1;
-        System.out.print("Dequeued Element: ");
-        return x;
-    }
-
-    int peek() throws IllegalStateException {
-        if(empty()) throw new IllegalStateException("Queue is empty !");
-        int x = queue[front];
-        System.out.print("Front element: ");
+        rear--;
+        size--;
+        if(front>rear) front=rear=-1;
+        System.out.print("Dequeued element: ");
         return x;
     }
 
     void display() throws IllegalStateException{
-        if(empty()) throw new IllegalStateException("Queue is EMPTY !");
-        for(int i=front; i<size; i++){
-            System.out.print(queue[i]+" ");
+        if(empty()) throw new IllegalStateException("Queue is Empty !");
+        System.out.print("Circular Queue: ");
+        for(int i=0; i<size; i++){
+            System.out.print(cqueue[i]+" ");
         }
         System.out.println();
     }
+
+    int peek() throws IllegalStateException{
+        if(empty()) throw new IllegalStateException("Queue is Empty !");
+        System.out.print("Front Element: ");
+        return cqueue[front];
+    }
 }
 
-public class QueueOps {
+public class CircularQueue {
     int capacity;
     Scanner sc = new Scanner(System.in);
-    QueueOps(){
+    CircularQueue(){
         while(true){
             try{
-                System.out.print("Enter the capacity of the Queue: ");
+                System.out.print("Enter the capacity of the queue: ");
                 capacity = sc.nextInt();
-                if(capacity<=0) throw new InputMismatchException("Invalid Capacity");
+                if(capacity<=0) throw new InputMismatchException("Invalid Capacity !");
                 break;
             } catch(InputMismatchException e){
-                System.out.println("Error: "+e.getMessage()+", please enter valid capacity !\n");
+                System.out.println(e.getMessage()+", Please enter valid capacity !\n");
             }
         }
     }
+
     public static void main(String[] args) {
-        QueueOps q = new QueueOps();
-        Queue queue = new Queue(q.capacity);
+        CircularQueue q = new CircularQueue();
+        CQueue queue = new CQueue(q.capacity);
+
         do{
             System.out.println();
             System.out.println("--Menu--");
@@ -91,13 +93,13 @@ public class QueueOps {
                     case 1:if(queue.full()) queue.enqueue(0);
                         System.out.print("Enter element to enter: ");
                         queue.enqueue(q.sc.nextInt());
+                        queue.display();
                         break;
 
                     case 2:System.out.println(queue.dequeue());
                         break;
 
-                    case 3:if(!queue.empty()) System.out.print("Queue: ");
-                        queue.display();
+                    case 3:queue.display();
                         break;
 
                     case 4:System.out.println(queue.peek());
@@ -105,18 +107,16 @@ public class QueueOps {
 
                     case 0:System.out.println("Exiting...");
                         System.exit(0);
+                        break;
 
-                    default:System.out.print("Invalid Choice !");
+                    default:System.out.println("Invalid Choice !");
                 }
             } catch(IllegalStateException e){
                 System.out.println("Error: "+e.getMessage());
-                if(e.getMessage()=="No More Operations can be performed !"){
-                    System.exit(0);
-                }
             } catch(Exception e){
                 System.out.println("Unexpected Error: "+e.getMessage());
             } finally {
-                System.out.print("Do you want to continue (1/0) ? ");
+                System.out.print("\nDo you want to continue (1/0): ");
             }
         }while(q.sc.nextInt()==1);
         System.out.println("Exiting...");

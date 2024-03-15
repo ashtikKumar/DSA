@@ -1,4 +1,4 @@
-package DSA.STACK;
+package DSA.Data_Structures.STACK;
 
 import java.util.NoSuchElementException;
 import java.util.Scanner;
