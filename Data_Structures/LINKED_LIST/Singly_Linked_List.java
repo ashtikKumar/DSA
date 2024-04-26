@@ -91,6 +91,28 @@ public class Singly_Linked_List {
         System.out.println("null");
     }
 
+    Node deleteFirst(Node head) throws IllegalAccessException {
+        if(head==null){
+            throw new IllegalAccessException("List is empty !");
+        }
+        head = head.next;
+        System.out.println("First Node deleted");
+        return head;
+    }
+
+    Node deleteLast(Node head) throws IllegalAccessException {
+        if(head==null){
+            throw new IllegalAccessException("List is empty !");
+        }
+        Node temp = head;
+        while(temp.next.next!=null){
+            temp = temp.next;
+        }
+        temp.next = null;
+        System.out.println("Last Node deleted");
+        return head;
+    }
+
     Node delete(int pos, Node head) throws IllegalAccessException{
         if(head==null){
             throw new IllegalAccessException("List is empty !");
@@ -112,6 +134,20 @@ public class Singly_Linked_List {
         }
         System.out.println("Node deleted from specified Position !");
         return head;
+    }
+
+    int search(Node head, int x) throws IllegalAccessException {
+        if(head==null) throw new IllegalAccessException("List is Empty !");
+        Node temp = head;
+        int c = 0;
+        while(temp!=null){
+            c++;
+            if(x==temp.data){
+                return c;
+            }
+            temp = temp.next;
+        }
+        return -1;
     }
 
     Node reverse(Node head) throws IllegalAccessException {
@@ -140,9 +176,12 @@ public class Singly_Linked_List {
                 System.out.println("1. Insert at Beginning");
                 System.out.println("2. Insert at End");
                 System.out.println("3. Insertion at Position");
-                System.out.println("4. Delete");
-                System.out.println("5. Reverse");
-                System.out.println("6. Display");
+                System.out.println("4. Delete from Beginning");
+                System.out.println("5. Delete from End");
+                System.out.println("6. Delete from Position");
+                System.out.println("7. Reverse");
+                System.out.println("8. Display");
+                System.out.println("9. Search");
                 System.out.println("0. Exit");
                 System.out.print("\nEnter Choice: ");
                 switch(sc.nextInt()){
@@ -161,7 +200,13 @@ public class Singly_Linked_List {
                         list.head = list.in_at_pos(sc.nextInt(), sc.nextInt(), list.head);
                         break;
 
-                    case 4:if(list.head!=null){
+                    case 4:list.head = list.deleteFirst(list.head);
+                        break;
+
+                    case 5:list.head = list.deleteLast(list.head);
+                        break;
+
+                    case 6:if(list.head!=null){
                             System.out.println("\nDelete a Node from a Position");
                             System.out.print("Enter Position: ");
                             list.head = list.delete(sc.nextInt(),list.head);
@@ -169,10 +214,16 @@ public class Singly_Linked_List {
                         else throw new IllegalAccessException("List is Empty !");
                         break;
 
-                    case 5:list.head=list.reverse(list.head);
+                    case 7:list.head=list.reverse(list.head);
                         break;
 
-                    case 6:list.display(list.head);
+                    case 8:list.display(list.head);
+                        break;
+
+                    case 9:System.out.print("Enter Element to search: ");
+                        int pos = list.search(list.head, sc.nextInt());
+                        if(pos==-1) System.out.println("Element is not in the list");
+                        else System.out.println("Element is found at position: "+pos);
                         break;
 
                     case 0:System.out.println("Exiting...");
