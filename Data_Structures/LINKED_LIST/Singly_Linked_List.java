@@ -25,8 +25,10 @@ public class Singly_Linked_List {
         return c;
     }
 
-    Node in_at_beg(int data, Node head) throws IllegalAccessException{
-        Node temp = new Node(data);
+    Node in_at_beg(Scanner sc, Node head) throws IllegalAccessException{
+        System.out.println("Insert at Beginning");
+        System.out.print("Enter data: ");
+        Node temp = new Node(sc.nextInt());
         if(head==null){
             head=temp;
         } else {
@@ -185,9 +187,7 @@ public class Singly_Linked_List {
                 System.out.println("0. Exit");
                 System.out.print("\nEnter Choice: ");
                 switch(sc.nextInt()){
-                    case 1:System.out.println("\nInsert at the Beginning");
-                        System.out.print("Enter Element: ");
-                        list.head = list.in_at_beg(sc.nextInt(),list.head);
+                    case 1:list.head = list.in_at_beg(sc, list.head);
                         break;
 
                     case 2:System.out.println("\nInsert at the End");
