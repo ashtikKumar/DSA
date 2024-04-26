@@ -1,4 +1,5 @@
 package DSA.Data_Structures.LINKED_LIST;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 class Node {
@@ -183,8 +184,12 @@ public class Singly_Linked_List {
                 }
             } catch(IllegalAccessException e){
                 System.out.println("Error: "+e.getMessage());
+            } catch(InputMismatchException e){
+                System.out.println("Wrong Input! Error: "+e.getMessage());
+                sc.next();
             } catch(Exception e){
                 System.out.println("Unexpected Error! "+e.getMessage());
+                sc.next();
             } finally {
                 System.out.print("\nDo you want to continue? (1/0): ");
             }
